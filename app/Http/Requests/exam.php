@@ -25,7 +25,7 @@ class exam extends FormRequest
     {
         return [
             'name'=>'required',
-            'time'=>'required|integer',
+            'tidme'=>'required|integer',
             'start'=>'required',
             'end'=>'required',
             'gradepass'=>'required|between:1,100',

@@ -109,7 +109,7 @@ $(function() {
                 cars.push($(this).val());
             }
         });
-            localStorage.setItem($(this).attr('id'),cars);
+            localStorage.setItem($(this).attr('id'),JSON.stringify(cars));
             $('.LQ'+$(this).attr('id')).css('background','green');
             if (cars=='') {
                 localStorage.removeItem($(this).attr('id'));
@@ -130,28 +130,21 @@ $(function() {
         });
     });
     $.each(localStorage, function(i, item) {
-            $(".t"+i).attr('value',item);
-            $("input[type=radio][value=\""+item+"\"]."+i).click();
-            // alert(item[7]);
-            if(item[7]!=','){
-               $("input[type=checkbox][value=\""+item+"\"]."+i).click();
-            }
-            if(item[7]==',')
-            {
-              $("input[type=checkbox][value=\"option"+item[6]+"\"]."+i).click();
-            }
-            if(item[15]==',')
-            {
-              $("input[type=checkbox][value=\"option"+item[14]+"\"]."+i).click();
-            }
-            if(item[23]==',' )
-            {
-              $("input[type=checkbox][value=\"option"+item[22]+"\"]."+i).click();
-            }
-            if(item[31]==',' )
-            {
-              $("input[type=checkbox][value=\"option"+item[30]+"\"]."+i).click();
-            }
+
+        if(item[0]=="[")
+        {
+        var favorites=JSON.parse(localStorage.getItem(i));
+
+        for (var j=0; j<favorites.length; j++) {
+           $("input[type=checkbox][value=\""+favorites[j]+"\"]."+i).click();
+         }
+        }
+        else
+        {
+           $(".t"+i).attr('value',item);
+           $("input[type=radio][value=\""+item+"\"]."+i).click();
+        }
+
     });
     $(window).load(function(e){
       var timeer=$('#start').attr('title');
