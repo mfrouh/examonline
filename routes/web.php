@@ -60,11 +60,11 @@ Route::get('/myinformation', 'SettingController@myinformation')->middleware('aut
 Route::put('/information', 'SettingController@information')->middleware('auth');
 Route::put('/changepassword', 'SettingController@changepassword')->middleware('auth');
 
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
 
 
 
 
 });
-Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');
