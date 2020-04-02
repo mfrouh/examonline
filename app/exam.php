@@ -12,18 +12,18 @@ class exam extends Model
     protected $dates=[
         'start','end'
     ];
-   public function start()
-   {
-      return $this->start->translatedformat('Y-m-d').'T'. $this->start->translatedformat('h:i:s');
-   }
-   public function now()
-   {
-      return now()->translatedformat('Y-m-d').'T'. now()->translatedformat('h:i:s');
-   }
-   public function end()
-   {
-    return $this->end->translatedformat('Y-m-d').'T'. $this->end->translatedformat('h:i:s');
-}
+    public function start()
+     {
+       return $this->start->translatedformat('Y-m-d').'T'. $this->start->translatedformat('h:i:s');
+     }
+    public function now()
+     {
+       return now()->translatedformat('Y-m-d').'T'. now()->translatedformat('h:i:s');
+     }
+    public function end()
+     {
+       return $this->end->translatedformat('Y-m-d').'T'. $this->end->translatedformat('h:i:s');
+     }
     public function group()
     {
         return $this->belongsTo('App\group');

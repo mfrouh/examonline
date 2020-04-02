@@ -24,7 +24,7 @@ class exam extends FormRequest
     public function rules()
     {
         return [
-            'name'=>'required|unique:exams',
+            'name'=>'required',
             'time'=>'required|integer',
             'start'=>'required',
             'end'=>'required',

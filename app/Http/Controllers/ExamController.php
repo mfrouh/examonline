@@ -47,6 +47,8 @@ class ExamController extends Controller
         $exam->time=$request->time;
         $exam->start=$request->start;
         $exam->end=$request->end;
+        $exam->take=$request->take;
+        $exam->calculate=$request->calculate;
         $exam->gradepass=$request->gradepass;
         $exam->save();
         return redirect('/exam');
@@ -96,6 +98,8 @@ class ExamController extends Controller
         $exam->time=$request->time;
         $exam->start=$request->start;
         $exam->end=$request->end;
+        $exam->take=$request->take;
+        $exam->calculate=$request->calculate;
         $exam->gradepass=$request->gradepass;
         $exam->save();
         return redirect('/exam');

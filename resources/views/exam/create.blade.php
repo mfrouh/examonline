@@ -39,6 +39,17 @@
                      @enderror
                 </div>
                 <div class="form-group">
+                    <label for="">@lang('home.take')</label>
+                    <input type="number" name="take" id="" min="1" max="10" class="form-control" aria-describedby="helpId">
+                </div>
+                <div class="form-group">
+                    <label for="">@lang('home.calculate')</label>
+                    <select name="calculate"  class="form-control" id="">
+                        <option value="best">@lang('home.best')</option>
+                        <option value="average">@lang('home.average')</option>
+                    </select>
+                </div>
+                <div class="form-group">
                     <label for="">@lang('home.start')</label>
                     <input type="datetime-local" name='start' id=""   class="form-control  @error('start') is-invalid @enderror" placeholder="@lang('home.start')" aria-describedby="helpId">
                      @error('start')

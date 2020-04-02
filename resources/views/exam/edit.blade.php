@@ -40,8 +40,19 @@
                      @enderror
                 </div>
                 <div class="form-group">
+                    <label for="">@lang('home.take')</label>
+                    <input type="number" name="take" id="" value="{{$exam->take}}" min="1" max="10" class="form-control" aria-describedby="helpId">
+                </div>
+                <div class="form-group">
+                    <label for="">@lang('home.calculate')</label>
+                    <select name="calculate" class="form-control" id="">
+                        <option value="best"{{$exam->calculate=='best'?'selected':''}}>@lang('home.best')</option>
+                        <option value="average" {{$exam->calculate=='average'?'selected':''}}>@lang('home.average')</option>
+                    </select>
+                </div>
+                <div class="form-group">
                     <label for="">@lang('home.start')</label>
-                    <input type="datetime-local" name='start' min="{{$exam->now()}}" id="" value="{{$exam->start()}}" class="form-control  @error('start') is-invalid @enderror" placeholder="@lang('home.start')" aria-describedby="helpId">
+                    <input type="datetime-local" name='start' min="{{$exam->now()}}" id="" value="" class="form-control  @error('start') is-invalid @enderror" placeholder="@lang('home.start')" aria-describedby="helpId">
                      @error('start')
                        <span class="invalid-feedback" role="alert">
                            <strong>{{ $message }}</strong>
@@ -50,7 +61,7 @@
                 </div>
                 <div class="form-group">
                     <label for="">@lang('home.end')</label>
-                    <input type="datetime-local" name='end'  min="{{$exam->now()}}" id=""value="{{$exam->end()}}" class="form-control  @error('end') is-invalid @enderror" placeholder="@lang('home.end')" aria-describedby="helpId">
+                    <input type="datetime-local" name='end'  min="{{$exam->now()}}" id=""value="" class="form-control  @error('end') is-invalid @enderror" placeholder="@lang('home.end')" aria-describedby="helpId">
                      @error('end')
                        <span class="invalid-feedback" role="alert">
                            <strong>{{ $message }}</strong>
