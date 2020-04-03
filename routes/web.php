@@ -62,12 +62,6 @@ Route::post('/sessionexam', 'studentController@sessionexam');
 Route::get('/myinformation', 'SettingController@myinformation')->middleware('auth');
 Route::put('/information', 'SettingController@information')->middleware('auth');
 Route::put('/changepassword', 'SettingController@changepassword')->middleware('auth');
-
 Auth::routes();
-
 Route::get('/home', 'HomeController@index')->name('home');
-
-
-
-
 });
