@@ -25,7 +25,6 @@
                               <td>{{$studentgroup->group->name}}</td>
                               <td>{!!$studentgroup->state()!!}</td>
                               <td>
-                                  <a class="btn btn-outline-primary btn-sm" href="/studentgroup/{{$studentgroup->id}}/edit"><i class="fa fa-edit"></i></a>
                                   <a class="btn btn-outline-danger btn-sm" href="" onclick="event.preventDefault();document.getElementById('delete-studentgroup-{{$studentgroup->id}}').submit();">
                                   <i class="fa fa-trash"></i></a>
                                   <form id="delete-studentgroup-{{$studentgroup->id}}" action="/studentgroup/{{$studentgroup->id}}" method="POST" style="display: none;">

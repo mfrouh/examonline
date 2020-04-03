@@ -51,48 +51,6 @@ class StudentgroupController extends Controller
         }
         return back()->with('error','this found');
     }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\studentgroup  $studentgroup
-     * @return \Illuminate\Http\Response
-     */
-    public function show(studentgroup $studentgroup)
-    {
-        return view('studentgroup.show',compact('studentgroup'));
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\studentgroup  $studentgroup
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(studentgroup $studentgroup)
-    {
-        return view('studentgroup.edit',compact('studentgroup'));
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\studentgroup  $studentgroup
-     * @return \Illuminate\Http\Response
-     */
-    public function update(AppStudentgroup $request, studentgroup $studentgroup)
-    {
-        $student=studentgroup::where('user_id',auth()->user()->id)->where('group_id',$request->group_id)->first();
-        if(!$student){
-        $studentgroup->group_id=$request->group_id;
-        $studentgroup->user_id=auth()->user()->id;
-        $studentgroup->save();
-        return redirect('/studentgroup');
-        }
-        return back()->with('group_id','this found');
-    }
-
     /**
      * Remove the specified resource from storage.
      *

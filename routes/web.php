@@ -32,7 +32,10 @@ Route::get('/lang/{lang}', function ($lang) {
 Route::group(['middleware'=>['lang']],function(){
 Route::resource('exam', 'ExamController');
 Route::resource('group', 'GroupController');
-Route::resource('studentgroup', 'StudentgroupController');
+Route::get('/studentgroup', 'StudentgroupController@index');
+Route::get('/studentgroup/create', 'StudentgroupController@create');
+Route::post('/studentgroup', 'StudentgroupController@store');
+Route::delete('/studentgroup/{id}', 'StudentgroupController@destroy');
 Route::get('/', 'HomeController@index')->middleware('auth');
 Route::get('/question', 'QuestionController@index');
 Route::post('/question', 'QuestionController@store');

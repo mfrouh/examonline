@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\exam;
 use App\examsetting;
-use App\Http\Requests\studentgroup;
+use App\studentgroup;
 use App\question;
 use App\studentexam;
 use Carbon\Carbon;
@@ -105,7 +105,7 @@ class studentController extends Controller
         $examsetting->end=$totalend=$day.$hour.$minute.$second;
         $examsetting->save();
         return response()->json(['success'=>'ok','data'=>$examsetting]);
-    }
+        }
     else{
         $arr=[0,1,2,3,4,5,6,7,8,9];
         $day;$hour;$minute;$second;
