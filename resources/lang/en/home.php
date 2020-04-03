@@ -92,6 +92,13 @@ return [
 'fail'=>'Fail Students',
 'pass'=>'Pass Students',
 'clear'=>'Clear',
+'take'=>'Count Replay',
+'taked'=>'Taked',
+'calculate'=>'Type Calculate',
+'best'=>'Best',
+'average'=>'Average',
+
+
 
 
 ];

@@ -34,7 +34,7 @@
                               <td>{{$exam->start->translatedformat('d-m-Y h:i A')}}</td>
                               <td>{{$exam->end->translatedformat('d-m-Y h:i A')}}</td>
                               <td>
-                                  <a class="btn btn-outline-success brdrd" href="/show/{{$exam->id}}">@lang('home.start')</a>
+                                  <a class="btn btn-outline-success brdrd btn-sm" href="/show/{{$exam->id}}">@lang('home.start')</a>
                               </td>
                           </tr>
                           @endif
