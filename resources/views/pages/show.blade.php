@@ -15,7 +15,7 @@
                @include('pages.question')
                <div class="row text-center">
                 <div class="col-12">
-                  <input type="submit" class="btn btn-primary brdrd btn-sm" value="@lang('home.end')">
+                  <input type="submit" class="btn btn-primary brdrd btn-sm endexam" value="@lang('home.end')">
                 </div>
                </div>
            </form>
@@ -76,6 +76,9 @@ $(function() {
         $('.Q').attr('hidden','on')
         $('.Q'+id).removeAttr('hidden');
         localStorage.setItem('last',id);
+    });
+    $('.endexam').click(function(){
+        localStorage.clear();
     });
     $('.review').click(function(){
       var id=$(this).attr('role');

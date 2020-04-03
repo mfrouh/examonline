@@ -1,6 +1,7 @@
 <?php
 
 use App\exam;
+use App\examsetting;
 use App\question;
 use App\studentexam;
 
@@ -302,5 +303,6 @@ class Myquestion
         $studentexam->wrong=json_encode($this->Wrong());
         $studentexam->notanswer=json_encode($this->NotAnswer());
         $studentexam->save();
+        $examsetting=examsetting::where('user_id',$studentexam->user_id)->where('exam_id',$studentexam->exam_id)->delete();
     }
 }
