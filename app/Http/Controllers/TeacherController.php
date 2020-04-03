@@ -57,8 +57,21 @@ class TeacherController extends Controller
         if ($exam) {
         $studentexams=studentexam::where('exam_id',$exam->id)->pluck('user_id');
         $users=User::whereIn('id',$studentexams)->get();
-        $pass=studentexam::where('exam_id',$exam->id)->where('state','pass')->count();
-        $fail=studentexam::where('exam_id',$exam->id)->where('state','fail')->count();
+        $pass=array();
+        $fail=array();
+        foreach ($users as $k=> $user)
+        {
+          if($exam->Total($user->id)['state']=='pass')
+          {
+            $pass[]=$user->id;
+          }
+          if($exam->Total($user->id)['state']=='fail')
+          {
+            $fail[]=$user->id;
+          }
+        }
+        $pass=count($pass);
+        $fail=count($fail);
         return view('teacher.results',compact(['users','exam','fail','pass']));
         }
         return abort('404');
