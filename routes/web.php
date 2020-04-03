@@ -35,7 +35,7 @@ Route::resource('group', 'GroupController');
 Route::get('/studentgroup', 'StudentgroupController@index');
 Route::get('/studentgroup/create', 'StudentgroupController@create');
 Route::post('/studentgroup', 'StudentgroupController@store');
-Route::delete('/studentgroup/{id}', 'StudentgroupController@destroy');
+Route::delete('/studentgroup/{studentgroup}', 'StudentgroupController@destroy');
 Route::get('/', 'HomeController@index')->middleware('auth');
 Route::get('/question', 'QuestionController@index');
 Route::post('/question', 'QuestionController@store');
