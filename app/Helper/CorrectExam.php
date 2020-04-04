@@ -4,6 +4,7 @@ use App\exam;
 use App\examsetting;
 use App\question;
 use App\studentexam;
+use Carbon\Carbon;
 
 class CorrectExam
 {
@@ -14,7 +15,7 @@ class CorrectExam
     }
     private function CorrectAnswer()
     {
-      $correct=array();
+       $correct=array();
        foreach ($this->questions as $id => $answer)
        {
 
@@ -258,5 +259,125 @@ class CorrectExam
         $studentexam->notanswer=json_encode($this->NotAnswer());
         $studentexam->save();
         $examsetting=examsetting::where('user_id',$studentexam->user_id)->where('exam_id',$studentexam->exam_id)->delete();
+    }
+    private function gettime($date)
+    {
+        $arr=[0,1,2,3,4,5,6,7,8,9];
+        $day='';$hour='';$minute='';$second='';
+        $date=$date;
+
+        if(in_array($date->get('day'),$arr))
+        {
+            $day="0".$date->get('day');
+        }
+        else
+        {
+            $day=$date->get('day');
+        }
+
+        if(in_array($date->get('hour'),$arr))
+        {
+            $hour="0".$date->get('hour');
+        }
+        else
+        {
+            $hour=$date->get('hour');
+        }
+
+        if(in_array($date->get('minute'),$arr))
+        {
+          $minute="0".$date->get('minute');
+        }
+        else
+        {
+            $minute=$date->get('minute');
+        }
+
+        if(in_array($date->get('second'),$arr))
+        {
+          $second="0".$date->get('second');
+        }
+        else
+        {
+            $second=$date->get('second');
+        }
+        $total=$day.$hour.$minute.$second;
+
+        return $total;
+    }
+    private function getnow($date)
+    {
+        $arr=[0,1,2,3,4,5,6,7,8,9];
+        $day='';$hour='';$minute='';$second='';
+        $date=$date;
+
+        if(in_array($date->get('day'),$arr))
+        {
+            $day="0".$date->get('day');
+        }
+        else
+        {
+            $day=$date->get('day');
+        }
+
+        if(in_array($date->get('hour'),$arr))
+        {
+            $hour="0".$date->get('hour');
+        }
+        else
+        {
+            $hour=$date->get('hour');
+        }
+
+        if(in_array($date->get('minute'),$arr))
+        {
+          $minute="0".$date->get('minute');
+        }
+        else
+        {
+            $minute=$date->get('minute');
+        }
+
+        if(in_array($date->get('second'),$arr))
+        {
+          $second="0".$date->get('second');
+        }
+        else
+        {
+            $second=$date->get('second');
+        }
+        return $day*60*60*24+$hour*60*60+$minute*60+$second;
+    }
+    public function sessionexam($request)
+    {
+        $date1=Carbon::now()->addMinutes($request->timeer);
+        $countexam=examsetting::where('user_id',auth()->user()->id)->where('exam_id',$request->exam)->count();
+        $ex=examsetting::where('user_id',auth()->user()->id)->where('exam_id',$request->exam)->first();
+        if($countexam==0)
+        {
+            $examsetting=new examsetting();
+            $examsetting->name=auth()->user()->id."__".$request->exam;
+            $examsetting->user_id=auth()->user()->id;
+            $examsetting->exam_id=$request->exam;
+            $examsetting->end=$this->gettime($date1);
+            $examsetting->save();
+            return ['success'=>'ok','data'=>$examsetting];
+        }
+        else
+        {
+          $date2=Carbon::now();
+
+          if($this->gettime($date2) >= $ex->end)
+          {
+             return ['success'=>'foundend','data'=>$this->gettime($date2)];
+          }
+          else
+          {
+             $ag = str_split($ex->end, strlen($ex->end)/4);
+             $tnowsec=$this->getnow($date2);
+             $tnowsecend=$ag[0]*60*60*24+$ag[1]*60*60+($ag[2])*60+$ag[3];
+             return ['success'=>'foundnotend','data'=>($tnowsecend-$tnowsec)];
+          }
+        }
     }
 }

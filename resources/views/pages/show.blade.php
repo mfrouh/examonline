@@ -54,13 +54,15 @@ $(function() {
       }
     });
     $(window).load(function(){
-        if (localStorage.length==0) {
+        if (!localStorage.getItem('last')) {
             localStorage.setItem('last','');
         }
         if(localStorage.getItem('last')==''){
              $('.Q1').removeAttr('hidden');
+             $('.LQ:first').css('color','white').css('font-size','33px');
         }
         else{
+            $('.LQ'+localStorage.getItem('last')).css('color','white').css('font-size','33px');
             $('.Q'+localStorage.getItem('last')).removeAttr('hidden');
         }
     });
@@ -76,6 +78,9 @@ $(function() {
         $('.Q').attr('hidden','on')
         $('.Q'+id).removeAttr('hidden');
         localStorage.setItem('last',id);
+        $('.LQ'+localStorage.getItem('last')).css('color','white').css('font-size','33px');
+        location.reload();
+
     });
     $('.endexam').click(function(){
         localStorage.clear();
