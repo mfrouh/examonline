@@ -11,9 +11,12 @@
       <div class="col-8 p-2">
          {{$question->question}}
       </div>
-      <div class="col-2 p-2 bg-warning">
+      <div class="col-1 p-2 bg-warning">
          {{$question->mark}} @lang('home.grade')
       </div>
+      <div class="col-1 p-2 bg-info">
+        {{$studentexam->Corrected($question->id)}} @lang('home.grade')
+     </div>
   </div>
 @if ($question->type=='complete')
    <div class="row">

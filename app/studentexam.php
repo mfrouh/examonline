@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\question;
 use Illuminate\Database\Eloquent\Model;
 
 class studentexam extends Model
@@ -150,5 +151,4 @@ class studentexam extends Model
             return $this->wrong()[$id];
         }
     }
-
 }
