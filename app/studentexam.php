@@ -46,6 +46,7 @@ class studentexam extends Model
         };
        }
         return $arr;
+
     }
     public function countcorrect()
     {
@@ -150,5 +151,59 @@ class studentexam extends Model
         {
             return $this->wrong()[$id];
         }
+    }
+    public function Corrected($id)
+    {
+        $wrong=0;
+        $correct=0;
+        $question=question::findorfail($id);
+         if(isset($this->Correct()[$id]) && isset($this->Wrong()[$id]))
+         {
+            if(is_array(json_decode($this->Correct()[$id])))
+            {
+                $correct =$question->mark*(count(json_decode($this->Correct()[$id]))/count(json_decode($question->correctanswer)));
+            }
+            $wrong1=array();
+            foreach (json_decode($this->wrong()[$id]) as $key => $value) {
+                $wrong1[]=$value;
+            }
+            if(is_array($wrong1))
+            {
+                $wrong =$question->mark*(count($wrong1)/count(json_decode($question->correctanswer)));
+            }
+            if($wrong >= $correct)
+            {
+              return 0;
+            }
+            elseif($wrong < $correct)
+            {
+               return $correct-$wrong;
+            }
+         }
+         elseif(isset($this->Correct()[$id]))
+         {
+             if(is_array(json_decode($this->Correct()[$id])))
+             {
+                 return  $question->mark*count(json_decode($this->Correct()[$id]))/count(json_decode($question->correctanswer));
+             }
+           return $question->mark;
+         }
+         elseif(isset($this->Wrong()[$id]))
+         {
+            if(is_array(json_decode($this->Wrong()[$id])))
+            {
+                return  $question->mark*count(json_decode($this->Wrong()[$id]))/count(json_decode($question->correctanswer));
+            }
+           return 0;
+         }
+         elseif(isset($this->NotAnswer()[$id]))
+         {
+           return 0;
+         }
+         else
+         {
+             return 0;
+         }
+
     }
 }
