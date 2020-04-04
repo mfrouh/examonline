@@ -8,6 +8,7 @@ use App\studentgroup;
 use App\question;
 use App\studentexam;
 use Carbon\Carbon;
+use CorrectExam;
 use Illuminate\Http\Request;
 use Myquestion;
 
@@ -31,7 +32,7 @@ class studentController extends Controller
         $exam=exam::find($request->exam_id);
         $studentexams=studentexam::where('exam_id',$exam->id)->where('user_id',auth()->user()->id)->count();
         if($exam->take > $studentexams){
-        $Myquestion=new Myquestion($request->except('_token'));
+        $Myquestion=new CorrectExam($request->except('_token'));
         $Myquestion->saveexam();
         return redirect('/results');
         }

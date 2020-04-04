@@ -106,8 +106,9 @@ $(function() {
     });
 
     $('input:checkbox').on('change', function() {
-         var cars = [];
+      var cars = [];
         $('input:checkbox').each(function() {
+
             if ($(this).is(':checked') == true) {
                 cars.push($(this).val());
             }
@@ -132,6 +133,7 @@ $(function() {
             }
         });
     });
+    $(window).load(function(){
     $.each(localStorage, function(i, item) {
 
         if(item[0]=="[")
@@ -148,6 +150,7 @@ $(function() {
            $("input[type=radio][value=\""+item+"\"]."+i).click();
         }
 
+    });
     });
     $(window).load(function(e){
       var timeer=$('#start').attr('title');
