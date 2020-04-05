@@ -12,6 +12,10 @@ class exam extends Model
     protected $dates=[
         'start','end'
     ];
+    public function finalresults()
+    {
+        return $this->hasMany('App\finalresult');
+    }
     public function start()
      {
        return $this->start->translatedformat('Y-m-d').'T'. $this->start->translatedformat('h:i:s');
@@ -85,6 +89,7 @@ class exam extends Model
        $totalscore=0;
        $state='';
        $studentexams=studentexam::where('user_id',$id)->where('exam_id',$this->id)->get();
+       $taked=studentexam::where('user_id',$id)->where('exam_id',$this->id)->count();
        foreach ($studentexams as $key => $studentexam) {
                $correct+=$studentexam->countcorrect();
                $wrong+=$studentexam->countwrong();
@@ -107,8 +112,7 @@ class exam extends Model
        {
         $state='fail';
        }
-
-       return ['correct'=>$correct,'wrong'=>$wrong,'notanswer'=>$notanswer,'score'=>$totalscore,'state'=>$state];
+       return ['correct'=>$correct,'wrong'=>$wrong,'notanswer'=>$notanswer,'score'=>$totalscore,'state'=>$state,'taked'=>$taked];
     }
 
 }

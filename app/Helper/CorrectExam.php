@@ -2,6 +2,7 @@
 
 use App\exam;
 use App\examsetting;
+use App\finalresult;
 use App\question;
 use App\studentexam;
 use Carbon\Carbon;
@@ -258,6 +259,7 @@ class CorrectExam
         $studentexam->wrong=json_encode($this->WrongAnswer());
         $studentexam->notanswer=json_encode($this->NotAnswer());
         $studentexam->save();
+        $this->finalresult();
         $examsetting=examsetting::where('user_id',$studentexam->user_id)->where('exam_id',$studentexam->exam_id)->delete();
     }
     private function gettime($date)
@@ -379,5 +381,35 @@ class CorrectExam
              return ['success'=>'foundnotend','data'=>($tnowsecend-$tnowsec)];
           }
         }
+    }
+    private function finalresult()
+    {
+       $finalresult=finalresult::where('user_id',auth()->user()->id)->where('exam_id',$this->questions['exam_id'])->first();
+       $exam=exam::find($this->questions['exam_id']);
+       if(!$finalresult)
+       {
+          $finalresult=new finalresult();
+          $finalresult->exam_id=$exam->id;
+          $finalresult->user_id=auth()->user()->id;
+          $finalresult->correct=$exam->Total(auth()->user()->id)['correct'];
+          $finalresult->wrong=$exam->Total(auth()->user()->id)['wrong'];
+          $finalresult->notanswer=$exam->Total(auth()->user()->id)['notanswer'];
+          $finalresult->score=$exam->Total(auth()->user()->id)['score'];
+          $finalresult->state=$exam->Total(auth()->user()->id)['state'];
+          $finalresult->taked=$exam->Total(auth()->user()->id)['taked'];
+          $finalresult->save();
+       }
+       else
+       {
+          $finalresult->exam_id=$exam->id;
+          $finalresult->user_id=auth()->user()->id;
+          $finalresult->correct=$exam->Total(auth()->user()->id)['correct'];
+          $finalresult->wrong=$exam->Total(auth()->user()->id)['wrong'];
+          $finalresult->notanswer=$exam->Total(auth()->user()->id)['notanswer'];
+          $finalresult->score=$exam->Total(auth()->user()->id)['score'];
+          $finalresult->state=$exam->Total(auth()->user()->id)['state'];
+          $finalresult->taked=$exam->Total(auth()->user()->id)['taked'];
+          $finalresult->save();
+       }
     }
 }
