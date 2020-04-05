@@ -26,20 +26,20 @@
                       </tr>
                       </thead>
                       <tbody>
-                        @foreach ($exams as $k=> $exam)
+                        @foreach ($finalresults as $k=> $finalresult)
                           <tr>
                               <td>{{$k+1}}</td>
-                              <td>{{$exam->name}}</td>
-                              <td>{{$exam->time}} @lang('home.min')</td>
-                              <td>{{$exam->gradepass}} %</td>
-                              <td>{{$exam->group->name}}</td>
-                              <td>{{$exam->calculate}}</td>
-                              <td>{{$exam->take}}</td>
-                              <td>{{count($exam->MR())}}</td>
-                              <td>{{$exam->start->translatedformat('d-m-Y h:i A')}}</td>
-                              <td>{{$exam->end->translatedformat('d-m-Y h:i A')}}</td>
+                              <td>{{$finalresult->exam->name}}</td>
+                              <td>{{$finalresult->exam->time}} @lang('home.min')</td>
+                              <td>{{$finalresult->exam->gradepass}} %</td>
+                              <td>{{$finalresult->exam->group->name}}</td>
+                              <td>@lang('home.'.$finalresult->exam->calculate)</td>
+                              <td>{{$finalresult->exam->take}}</td>
+                              <td>{{$finalresult->taked}}</td>
+                              <td>{{$finalresult->exam->start->translatedformat('d-m-Y h:i A')}}</td>
+                              <td>{{$finalresult->exam->end->translatedformat('d-m-Y h:i A')}}</td>
                               <td>
-                                  <a class="btn btn-outline-primary brdrd btn-sm" href="/result/{{auth()->user()->id}}/{{$exam->id}}">@lang('home.result')</a>
+                                  <a class="btn btn-outline-primary brdrd btn-sm" href="/result/{{auth()->user()->id}}/{{$finalresult->exam->id}}">@lang('home.result')</a>
                               </td>
                           </tr>
                         @endforeach

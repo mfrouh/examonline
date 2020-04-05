@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\exam;
+use App\finalresult;
 use App\group;
 use App\question;
 use App\studentexam;
@@ -55,24 +56,10 @@ class TeacherController extends Controller
         $groups=auth()->user()->groups->pluck('id')->toArray();
         $exam=exam::where('id',$id)->whereIn('group_id',$groups)->first();
         if ($exam) {
-        $studentexams=studentexam::where('exam_id',$exam->id)->pluck('user_id');
-        $users=User::whereIn('id',$studentexams)->get();
-        $pass=array();
-        $fail=array();
-        foreach ($users as $k=> $user)
-        {
-          if($exam->Total($user->id)['state']=='pass')
-          {
-            $pass[]=$user->id;
-          }
-          if($exam->Total($user->id)['state']=='fail')
-          {
-            $fail[]=$user->id;
-          }
-        }
-        $pass=count($pass);
-        $fail=count($fail);
-        return view('teacher.results',compact(['users','exam','fail','pass']));
+        $finalresults=finalresult::where('exam_id',$exam->id)->get();
+        $pass=finalresult::where('exam_id',$exam->id)->where('state','pass')->count();
+        $fail=finalresult::where('exam_id',$exam->id)->where('state','fail')->count();
+        return view('teacher.results',compact(['finalresults','exam','fail','pass']));
         }
         return abort('404');
     }
@@ -122,7 +109,6 @@ class TeacherController extends Controller
         $exam=exam::findorfail($id);
         $studentexams=studentexam::where('exam_id',$id)->where('user_id',$userid)->get();
         if (in_array($exam->group_id,auth()->user()->groups->pluck('id')->toArray())) {
-            // $questions=question::whereIn('id',json_decode($studentexam->questions))->get();
             return view('teacher.detailsresult',compact(['studentexams','userid','exam']));
         }
         return abort('404');

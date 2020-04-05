@@ -18,26 +18,30 @@
                           <th>@lang('home.studentname')</th>
                           <th>@lang('home.correctanswer')</th>
                           <th>@lang('home.wronganswer')</th>
+                          <th>@lang('home.notanswer')</th>
                           <th>@lang('home.state')</th>
+                          <th>@lang('home.taked')</th>
                           <th>@lang('home.score')</th>
                           <th></th>
                           <th></th>
                       </tr>
                       </thead>
                       <tbody>
-                        @foreach ($users as $k=> $user)
+                        @foreach ($finalresults as $k=> $finalresult)
                           <tr>
                               <td>{{$k+1}}</td>
-                              <td>{{$user->name}}</td>
-                              <td>{{$exam->Total($user->id)['correct']}}</td>
-                              <td>{{$exam->Total($user->id)['wrong']}}</td>
-                              <td>{{$exam->Total($user->id)['state']}}</td>
-                              <td>{{$exam->Total($user->id)['score']}}%</td>
+                              <td>{{$finalresult->user->name}}</td>
+                              <td>{{$finalresult->correct}}</td>
+                              <td>{{$finalresult->wrong}}</td>
+                              <td>{{$finalresult->notanswer}}</td>
+                              <td>{{$finalresult->state}}</td>
+                              <td>{{$finalresult->taked}}</td>
+                              <td>{{$finalresult->score}}%</td>
                               <td>
-                                  <a class="btn btn-outline-primary brdrd btn-sm" href="/studentresult/{{$user->id}}/{{$exam->id}}">@lang('home.result')</a>
+                                  <a class="btn btn-outline-primary brdrd btn-sm" href="/studentresult/{{$finalresult->user->id}}/{{$finalresult->exam->id}}">@lang('home.result')</a>
                               </td>
                               <td>
-                                <a class="btn btn-outline-success brdrd btn-sm" href="/detailsresult/{{$user->id}}/{{$exam->id}}">@lang('home.details')</a>
+                                <a class="btn btn-outline-success brdrd btn-sm" href="/detailsresult/{{$finalresult->user->id}}/{{$finalresult->exam->id}}">@lang('home.details')</a>
                               </td>
                           </tr>
                         @endforeach

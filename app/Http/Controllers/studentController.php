@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\exam;
 use App\examsetting;
+use App\finalresult;
 use App\studentgroup;
 use App\question;
 use App\studentexam;
@@ -56,7 +57,8 @@ class studentController extends Controller
     {
         $exam_id=auth()->user()->studentexams->pluck('exam_id')->toArray();
         $exams=exam::whereIn('id',$exam_id)->get();
-        return view('student.results',compact('exams'));
+        $finalresults=finalresult::where('user_id',auth()->user()->id)->get();
+        return view('student.results',compact('finalresults'));
     }
     public function sessionexam(Request $request)
     {
