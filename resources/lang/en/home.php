@@ -98,6 +98,9 @@ return [
 'best'=>'Best',
 'average'=>'Average',
 'addgroup'=>'Join In Group',
+'print'=>'Print',
+
+
 
 
 

@@ -3,9 +3,10 @@
 @lang('home.result')
 @endsection
 @section('content')
-<div class="container">
+<div class="container ">
   <div class="row mb-3">
     <div class="col-12 text-center">
+    <a class="btn btn-outline-primary brdrd" id="printtable"><i class="fa fa-print" aria-hidden="true"></i>@lang('home.print')</a>
      @foreach ($studentexams as $k=> $studentexam)
         <a class="btn btn-outline-success LR LR{{$k}}" id="{{$k}}">{{$k+1}}</a>
      @endforeach
@@ -73,7 +74,7 @@
     </div>
 
    <div class="col-8">
-    <div class="card text-center">
+    <div class="card text-center all">
         <div class="card-header bg-primary">
             @lang('home.result')
         </div>
@@ -136,5 +137,14 @@
         $('.LR'+id).css('background','green');
         localStorage.setItem('lastresult',id);
    });
+</script>
+<script type="text/javascript">
+    $(function() {
+       $('#printtable').click(function(e){
+        $('.all').printThis({
+            // beforePrintEvent:$('.btn').hide(),
+        });
+       })
+    });
 </script>
 @endsection

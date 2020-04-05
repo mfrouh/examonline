@@ -22,8 +22,9 @@
                           <th>@lang('home.state')</th>
                           <th>@lang('home.taked')</th>
                           <th>@lang('home.score')</th>
-                          <th></th>
-                          <th></th>
+                          <th colspan="2">
+                              <a class="btn btn-outline-primary brdrd" id="printtable"><i class="fa fa-print" aria-hidden="true"></i>@lang('home.print')</a>
+                          </th>
                       </tr>
                       </thead>
                       <tbody>
@@ -85,5 +86,14 @@
         // Configuration options go here
         options: {}
     });
+    </script>
+    <script type="text/javascript">
+        $(function() {
+           $('#printtable').click(function(e){
+            $('.table').printThis({
+                beforePrintEvent:$('.btn').hide(),
+            });
+           })
+        });
     </script>
 @endsection

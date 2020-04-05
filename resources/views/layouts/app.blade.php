@@ -24,6 +24,8 @@
     <link href="{{ asset('/css/news.css') }}" rel="stylesheet">
     <script src="{{ asset('/1.7.1/jquery.min.js') }}" type="text/javascript"></script>
     <script src="{{ asset('/js/chart.js') }}" type="text/javascript" ></script>
+    {{-- <script src="{{ asset('/js/printThis.js') }}" type="text/javascript" ></script> --}}
+
 
 </head>
 <body>
@@ -194,13 +196,12 @@ function closeNav() {
 
 
 </script>
-
 <script src="{{ asset('/js/more.js') }}" type="text/javascript" ></script>
 
 <script src="{{ asset('/js/jquery-3.3.1.js') }}" type="text/javascript" ></script>
 
 <script src="{{ asset('/js/bootstrap.min.js') }}"  type="text/javascript" ></script>
-
+<script src="{{ asset('/js/printThis.js') }}" type="text/javascript" ></script>
 <script src="{{ asset('/taginput/tagsinput.js') }}" type="text/javascript" ></script>
 
 </html>

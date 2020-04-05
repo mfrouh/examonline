@@ -4,9 +4,10 @@
 @endsection
 @section('content')
   <div class="container">
+    <a class="btn btn-outline-primary brdrd" id="printtable"><i class="fa fa-print" aria-hidden="true"></i>@lang('home.print')</a>
     <div class="row">
      <div class="col-8">
-      <div class="card text-center">
+      <div class="card text-center all">
           <div class="card-header bg-primary">
               @lang('home.results')
           </div>
@@ -84,4 +85,14 @@
         options: {}
     });
     </script>
+    <script type="text/javascript">
+        $(function() {
+           $('#printtable').click(function(e){
+            $('.all').printThis({
+                // beforePrintEvent:$('.btn').hide(),
+            });
+           })
+        });
+    </script>
+
 @endsection
