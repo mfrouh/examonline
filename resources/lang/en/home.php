@@ -97,7 +97,7 @@ return [
 'calculate'=>'Type Calculate',
 'best'=>'Best',
 'average'=>'Average',
-
+'addgroup'=>'Join In Group',
 
 
 
